@@ -32,12 +32,11 @@ function Center() {
     spotifyApi
       .getPlaylist(playlistId)
       .then((data) => {
+        console.log("Working");
         setPlaylist(data.body);
       })
       .catch((err) => console.log("something went wrong!", err));
   }, [spotifyApi, playlistId]);
-
-  console.log(playlist);
 
   return (
     <div className="flex-grow h-screen overflow-y-scroll scrollbar-hide ">
@@ -51,6 +50,7 @@ function Center() {
             src={session?.user.image}
             alt=""
           />
+          lo
           <h2>{session?.user.name}</h2>
           <KeyboardArrowDownRoundedIcon className="h-5 w-5" />
         </div>
@@ -61,7 +61,7 @@ function Center() {
       >
         <img
           className="h-44 w-44 shadow-2xl"
-          src={playlist?.image?.[0]?.url}
+          src={playlist?.images?.[0]?.url}
           alt=""
         />
         <div className="">

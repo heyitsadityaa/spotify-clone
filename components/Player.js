@@ -23,14 +23,25 @@ function Player() {
 
   const fetchCurrentSong = () => {
     if (!songInfo) {
-      spotifyApi.getMyCurrentPlayingTrack().then((data) => {
-        console.log("Now Playing: ", data.body?.item);
-        setCurrentIdTrack(data.body?.item?.id);
+      spotifyApi
+        .getMyCurrentPlayingTrack()
+        .then((data) => {
+          console.log("Now Playing: ", data.body?.item);
+          setCurrentIdTrack(data.body?.item?.id);
 
-        spotifyApi.getMyCurrentPlaybackState().then((data) => {
-          setIsPlaying(data.body?.is_playing);
+          // spotifyApi
+          //   .getMyCurrentPlaybackState()
+          //   .then((data) => {
+          //     setIsPlaying(data.body?.is_playing);
+          //     console.log("Error1");
+          //   })
+          //   .catch((e) => {
+          //     console.log("Error4", e);
+          //   });
+        })
+        .catch((e) => {
+          console.log("Error3", e);
         });
-      });
     }
   };
 
@@ -86,12 +97,12 @@ function Player() {
         {isPlaying ? (
           <PauseCircleFilledRoundedIcon
             className="button w-10 h-10"
-            onclick={handlePlayPause}
+            onClick={handlePlayPause}
           />
         ) : (
           <PlayCircleFilledWhiteRoundedIcon
             className="button w-10 h-10"
-            onclick={handlePlayPause}
+            onClick={handlePlayPause}
           />
         )}
         <FastForwardRoundedIcon className="button" />
@@ -101,7 +112,7 @@ function Player() {
 
       <div className="flex items-center space-x-3 md:space-x-4 justify-end pr-5">
         <VolumeDownRoundedIcon
-          onclick={() => volume > 0 && setVolume(volume - 10)}
+          onClick={() => volume > 0 && setVolume(volume - 10)}
           className="button"
         />
         <input
@@ -113,7 +124,7 @@ function Player() {
           max={100}
         />
         <VolumeUpRoundedIcon
-          onclick={() => volume < 100 && setVolume(volume + 10)}
+          onClick={() => volume < 100 && setVolume(volume + 10)}
           className="button"
         />
       </div>
